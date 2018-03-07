@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Pixel Display Library</title>
+		<link rel="stylesheet" href="style.css" />
+		<script src="script.js"></script>
+		<script src="../pixeldisplay.min.js"></script>
+	</head>
+	<body>
+		<h1>Pixel Display Library</h1>
+		<div id="credit">Made with &#10084; by <a target="_blank" href="https://benpai.keybase.pub">Benpai</a></div>
+		<canvas id="display" height="200px" width="200px" data-density="20" data-foreground-color="#3F51B5" data-background-color="#E8EAF6"></canvas>
+		<div id="controls">
+			<h2>Actions</h2>
+			<button type="button" onclick="d.renderArray(test_image);" title="Display.renderArray(array1);">Show array 1</button>
+			<button type="button" onclick="d.renderArray(test_image2);" title="Display.renderArray(array2);">Show array 2</button>
+			<button type="button" onclick="if (a.running) {a.stop(); this.innerHTML = 'Start animation';} else {a.start(); this.innerHTML = 'Stop animation';}" title="Animation.start(); and Animation.stop();">Start animation</button>
+			<button type="button" onclick="d.renderImage('test.png');" title="Display.renderImage('image.png');">Render image</button>
+			<button type="button" onclick="d.clear();" title="Display.clear();">Clear display</button>
+			<h2>Config</h2>
+			<label for="background-color">Background color: </label>
+			<input type="color" id="background-color" onchange="d.backColor = this.value;" /><br />
+			<label for="foreground-color">Foreground color: </label>
+			<input type="color" id="foreground-color" onchange="d.foreColor = this.value;" />
+			<script>
+				document.getElementById('background-color').value = document.getElementById('display').dataset.backgroundColor;
+				document.getElementById('foreground-color').value = document.getElementById('display').dataset.foregroundColor;
+			</script>
+			<h2>Features</h2>
+			<ul>
+				<li>No dependencies</li>
+				<li>Works in most major browsers</li>
+				<li>Animation support</li>
+				<li>Wide application</li>
+				<li>Easy to use</li>
+				<li>Highly configurable</li>
+			</ul>
+			<h2>Installation</h2>
+			<p>Download the latest minified javascript file and include it at the end of the body.</p>
+			<a href="../pixeldisplay.min.js" download="pixeldisplay.min.js" class="download_button">Download pixeldisplay.min.js</a>
+			<code><span style="color:#9effff"><span style="color:#e1efff">&lt;</span><span style="color:#9effff">script</span> <span style="color:#9effff">src</span>=<span style="color:#3ad900">"</span>pixeldisplay.min.js<span style="color:#3ad900">"</span><span style="color:#e1efff">>&lt;/</span><span style="color:#9effff">script</span><span style="color:#e1efff">></span></span></code>
+			<h2>Usage</h2>
+			<pre><code class="multi"><span style="color:#9effff"><span style="color:#e1efff">&lt;</span><span style="color:#9effff">canvas</span> <span style="color:#9effff">id</span><span style="color:#e1efff">=</span><span style="color:#3ad900">"</span><span style="color:#3ad900">display</span><span style="color:#3ad900">"</span> <span style="color:#9effff">height</span>=<span style="color:#3ad900">"</span>100px<span style="color:#3ad900">"</span> <span style="color:#9effff">width</span>=<span style="color:#3ad900">"</span>100px<span style="color:#3ad900">"</span> <span style="color:#9effff">data-density</span>=<span style="color:#3ad900">"</span>10<span style="color:#3ad900">"</span><span style="color:#e1efff">>&lt;/</span><span style="color:#9effff">canvas</span><span style="color:#e1efff">></span></span></code></pre>
+			<p>The canvas element must be in the HTML somewhere. You can have more than one on a page. You must set the <span class="inline_code">height</span>, <span class="inline_code">width</span>, and either <span class="inline_code">data-density</span> or <span class="inline_code">data-pixel-height</span> and <span class="inline_code">data-pixel-width</span>. You can also set the default colours for the display using <span class="inline_code">data-foreground-color</span> and <span class="inline_code">data-background-color</span>. These will default to black and white respectively.</p>
+			<pre><code class="multi">var display <span style="color:#47b8d6">=</span> <span style="color:#47b8d6">new</span> Display(<span style="color:#ad9361">'#display'</span>);</code></pre>
+			<p>Create a new <span class="inline_code">Display</span> object for each canvas you're using. The parameter is the selector for the canvas element in the HTML. The default selector is <span class="inline_code">#display</span>.</p>
+			<pre><code class="multi">display.renderArray(array);</code></pre>
+			<p>Render an array on the display canvas. Takes an array as parameter. The array must be the length of the amount of pixels in the display, and comprised of 1's and 0's. It's drawn onto the canvas from left to right, top to bottom. See the examples below.</p>
+			<pre><code class="multi">display.renderImage(<span style="color:#ad9361">'image.png'</span>, h<span style="color:#47b8d6">=</span><span style="color:#ccc">0</span>, w<span style="color:#47b8d6">=</span><span style="color:#ccc">0</span>, x<span style="color:#47b8d6">=</span><span style="color:#ccc">0</span>, y<span style="color:#47b8d6">=</span><span style="color:#ccc">0</span>);</code></pre>
+			<p>Render an image from a url on the display canvas. The image must be hosted on the same domain as the page, or have an <span class="inline_code">Access-Control-Allow-Origin</span> value of <span class="inline_code">*</span>. Setting the height or width to <span class="inline_code">0</span> defaults to the height or width of the canvas.</p>
+			<pre><code class="multi">display.clear();</code></pre>
+			<p>Clear the display.</p>
+			<pre><code class="multi">var animation <span style="color:#47b8d6">=</span> <span style="color:#47b8d6">new</span> Animation(display, [array1, array2], delay<span style="color:#47b8d6">=</span><span style="color:#ccc">500</span>);</code></pre>
+			<p>Create a new <span class="inline_code">Animation</span> object for each animation you want to play. The first parameter must be the <span class="inline_code">Display</span> object to be played on. The second parameter is an array of the arrays in the animation sequence. The third parameter is the delay between frames in milliseconds. By default it's 500 ms.</p>
+			<pre><code class="multi">animation.start();</code></pre>
+			<p>Start the animation on the designated <span class="inline_code">Display</span>.</p>
+			<pre><code class="multi">animation.stop();</code></pre>
+			<p>Stop the animation on the designated <span class="inline_code">Display</span>.</p>
+			<h2>Examples</h2>
+			<h3>Draw a simple image from an array</h3>
+			<pre><code class="multi" title="HTML"><span style="color:#9effff"><span style="color:#e1efff">&lt;</span><span style="color:#9effff">canvas</span> <span style="color:#9effff">id</span><span style="color:#e1efff">=</span><span style="color:#3ad900">"</span><span style="color:#3ad900">display</span><span style="color:#3ad900">"</span> <span style="color:#9effff">height</span>=<span style="color:#3ad900">"</span>100px<span style="color:#3ad900">"</span> <span style="color:#9effff">width</span>=<span style="color:#3ad900">"</span>100px<span style="color:#3ad900">"</span> <span style="color:#9effff">data-density</span>=<span style="color:#3ad900">"</span>4<span style="color:#3ad900">"</span><span style="color:#e1efff">>&lt;/</span><span style="color:#9effff">canvas</span><span style="color:#e1efff">></span></span></code></pre>
+			<pre><code class="multi" title="Javascript">var image <span style="color:#47b8d6">=</span> [
+    <span style="color:#ccc">1</span>,<span style="color:#ccc">0</span>,<span style="color:#ccc">0</span>,<span style="color:#ccc">0</span>,
+    <span style="color:#ccc">0</span>,<span style="color:#ccc">1</span>,<span style="color:#ccc">0</span>,<span style="color:#ccc">0</span>,
+    <span style="color:#ccc">0</span>,<span style="color:#ccc">0</span>,<span style="color:#ccc">1</span>,<span style="color:#ccc">0</span>,
+    <span style="color:#ccc">0</span>,<span style="color:#ccc">0</span>,<span style="color:#ccc">0</span>,<span style="color:#ccc">1</span>
+];
+
+var d <span style="color:#47b8d6">=</span> <span style="color:#47b8d6">new</span> Display();
+d.renderArray(image);</code></pre>
+			<code class="multi" title="Result">
+				<canvas id="ex1" height="100px" width="100px" data-density="4"></canvas>
+			</code>
+			<script>
+				var image = [
+					1,0,0,0,
+					0,1,0,0,
+					0,0,1,0,
+					0,0,0,1
+				];
+
+				var ex1 = new Display('#ex1');
+				ex1.renderArray(image);
+			</script>
+			<h3>Render an image onto a display with non-square pixels</h3>
+			<pre><code class="multi" title="HTML"><span style="color:#9effff"><span style="color:#e1efff">&lt;</span><span style="color:#9effff">canvas</span> <span style="color:#9effff">id</span><span style="color:#e1efff">=</span><span style="color:#3ad900">"</span><span style="color:#3ad900">display</span><span style="color:#3ad900">"</span> <span style="color:#9effff">height</span>=<span style="color:#3ad900">"</span>100px<span style="color:#3ad900">"</span> <span style="color:#9effff">width</span>=<span style="color:#3ad900">"</span>100px<span style="color:#3ad900">"</span> <span style="color:#9effff">data-pixel-height</span>=<span style="color:#3ad900">"</span>10<span style="color:#3ad900">"</span> <span style="color:#9effff">data-pixel-width</span>=<span style="color:#3ad900">"</span>20<span style="color:#3ad900">"</span><span style="color:#e1efff">>&lt;/</span><span style="color:#9effff">canvas</span><span style="color:#e1efff">></span></span></code></pre>
+			<pre><code class="multi" title="Javascript">var d <span style="color:#47b8d6">=</span> <span style="color:#47b8d6">new</span> Display();
+d.renderImage(<span style="color:#ad9361">'rainbow.png'</span>);</code></pre>
+			<code class="multi" title="Result">
+				<canvas id="ex2" height="100px" width="100px" data-pixel-height="10" data-pixel-width="20"></canvas>
+			</code>
+			<script>
+				var ex2 = new Display('#ex2');
+				ex2.renderImage('test.png');
+			</script>
+			<h2>Supported Browsers</h2>
+			<div id="browsers">
+				<img src="res/chrome.svg" />
+				<img src="res/firefox.svg" />
+				<img src="res/egde.svg" />
+			</div>
+			<p>The Pixel Display library has been tested and working on Chrome, Firefox, and Microsoft Edge. It does not work on IE. Other browsers are yet to be tested.</p>
+			<h2>Bugs and Issues</h2>
+			<p>If you encounter a bug, need some help or find an issue in the code, you can <a href="#">submit an issue</a> on Github.</p>
+		</div>
+		<script>
+			var d = new Display();
+			d.renderArray(test_image);
+			var a = new Animation(d, [test_image, test_image2]);
+		</script>
+	</body>
+</html>

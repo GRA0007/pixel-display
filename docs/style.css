@@ -1,0 +1,121 @@
+* {
+	outline:none;
+}
+body {
+	margin:0;
+	font-family:sans-serif;
+}
+h1 {
+	text-align:center;
+}
+h2 {
+	border-bottom:2px solid #AAA;
+	padding-bottom:2px;
+}
+body > canvas {
+	margin:50px auto 20px auto;
+	border:4px solid #999;
+	display:block;
+}
+a {
+	color:#3F51B5;
+}
+
+#controls {
+	width:800px;
+	margin:0 auto;
+}
+#controls button {
+	border:1px solid #999;
+	border-radius:5px;
+	background-color:#FFF;
+	padding:8px 10px;
+	cursor:pointer;
+	font-family:inherit;
+	font-size:18px;
+}
+#controls button:hover,
+#controls input[type=color]:hover {
+	border:1px solid #000;
+}
+#controls label {
+	font-size:18px;
+}
+#controls input[type=color] {
+	border:1px solid #999;
+	border-radius:5px;
+	background-color:#FFF;
+	padding:3px 5px;
+	cursor:pointer;
+	margin-bottom:3px;
+}
+
+.download_button {
+	border-radius:5px;
+	background-color:#3F51B5;
+	padding:8px 10px;
+	font-family:inherit;
+	font-size:16px;
+	text-decoration:none;
+	color:#FFF;
+}
+.download_button:hover {
+	opacity:0.8;
+}
+
+code {
+	border-radius:5px;
+	background-color:#333;
+	padding:8px 10px;
+	color:#FFF;
+	font-size:16px;
+	box-sizing:border-box;
+}
+code.multi {
+	font-size:14px;
+	display:block;
+	overflow-x:auto;
+}
+pre {
+	tab-size:4;
+}
+code[title]:before {
+	content:attr(title);
+	display:table;
+	font-size:16px;
+	font-weight:bold;
+	color:#333;
+	font-family:sans-serif;
+	padding:2px 4px 2px 4px;
+	background-color:#C5CAE9;
+	margin-bottom:5px;
+}
+span.inline_code {
+	font-family:monospace;
+	background-color:#DDD;
+	padding:3px 5px;
+	border-radius:2px;
+	margin:1px 0;
+	display:inline-block;
+}
+pre {
+	margin:6px 0 6px 0;
+}
+p {
+	margin:8px 0 30px 0;
+}
+
+#browsers img {
+	height:50px;
+	width:50px;
+	padding:5px 10px;
+}
+
+#credit {
+	text-align:center;
+	margin-top:-20px;
+	color:#777;
+}
+#credit a {
+	color:#777;
+}
